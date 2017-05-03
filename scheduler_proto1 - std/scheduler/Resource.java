@@ -10,13 +10,10 @@ public class Resource {
        Activity a2 = (Activity) ob2;
        if(a1.getActivation() > a2.getActivation()) {
          return 1;
-       } 
-       if else(a1.getActivation() < a2.getActivation()){
+       }else if(a1.getActivation() < a2.getActivation()){
          return -1;
-       }
-       if else(a1.getActivation() = a2.getActivation()) {
+       }else{
          return 0;
-       
        }
     }
   }
