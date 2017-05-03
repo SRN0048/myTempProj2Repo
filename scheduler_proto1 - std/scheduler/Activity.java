@@ -59,6 +59,16 @@ public class Activity {
   
   public void setReleaseTime(double time) {
     // YOUR CODE here
+    if (time < 0.0){
+      return;
+    }
+    if (time < this.releaseTime || (time + this.duration) < this.dueTime){
+      this.releaseTime = time;
+    }
+    if (releaseTime > terminationTime) {
+      activationTime = releaseTime;
+      terminationTime = activationTime + duration;
+    }
   }
 
   public void reset() {
@@ -100,16 +110,16 @@ public class Activity {
     if(this.releaseTime>this.activationTime){
      pe = 1.0*(this.releaseTime-this.activationTime);
     }else if(this.releaseTime<=this.activationTime){
-     pe = (double)0; 
+     pe = 0; 
     }
     
     //calculate pt
     if(this.terminationTime>this.dueTime){
      pt = 1.0*(this.terminationTime-this.dueTime); 
     }else if(this.terminationTime<=this.dueTime){
-     pt = (double)0; 
+     pt = 0; 
     }
-    return (double)pe+pt;
+    return pe+pt;
   }
 
   // The store() method is used to store an activity's temporal parameters that
@@ -117,7 +127,8 @@ public class Activity {
   // algorithm during a given iteration step.
   public void store() {
     // YOUR CODE here
-    
+    tempActivationTime = activationTime;
+    tempTerminationTime = terminationTime;
   }
 
   //    The restore() method is invoked at the end of the scheduling process
